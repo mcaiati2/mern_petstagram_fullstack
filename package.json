@@ -9,12 +9,14 @@
     "client:build": "cd ./client && npm run build",
     "server:install": "cd ./server && npm i",
     "server:dev": "cd ./server && npm run dev",
+    "server:build": "cd ./server && npm run build",
     "dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3333 && npm run client:dev\"",
     "seed": "cd ./server && npm run seed",
     "start": "node ./server/dist/server.js",
     "render:install": "cd ./server && npm i",
     "install": "cd ./server && npm i && cd ../client && npm i",
-    "test": "concurrently \"npm run dev\" \"wait-on tcp:5173 && cd ./client && npm run cypress:open\""
+    "test": "concurrently \"npm run dev\" \"wait-on tcp:5173 && cd ./client && npm run cypress:open\"",
+    "prep": "npm run client:build && npm run server:build"
   },
   "keywords": [],
   "author": "",
