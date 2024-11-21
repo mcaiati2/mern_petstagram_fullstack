@@ -3,7 +3,7 @@ import { Button, Form, Modal, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 
 import { CREATE_POST } from '../../../graphql/mutations';
-import { GET_POSTS_FOR_PET } from '../../../graphql/queries';
+import { GET_POSTS_FOR_PET, GET_ALL_POSTS } from '../../../graphql/queries';
 import { Pet } from '../../../interfaces';
 
 const initialFormData = {
@@ -30,7 +30,7 @@ function CreatePostModal({
       variables: {
         petId: selectedPet?._id
       }
-    }]
+    }, { query: GET_ALL_POSTS }]
   });
 
   const handleModalClose = () => {
