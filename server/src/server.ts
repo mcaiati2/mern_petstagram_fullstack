@@ -36,6 +36,9 @@ connection.once('open', async () => {
     }),
   );
 
+  console.log('PROCESS PORT VARIABLE', process.env.PORT);
+  console.log('PORT VARIABLE', PORT);
+
   if (process.env.PORT) {
     const __dirname = path.dirname(new URL(import.meta.url).pathname);
     // Share all files in the client/dist folder with the client-side
