@@ -41,14 +41,16 @@ function Dashboard() {
             <h4>{pet.name}</h4>
             <p>Type: {pet.type}</p>
             <p>Age: {pet.age}</p>
-            <Button
-              variant="primary"
-              className="me-2"
-              onClick={() => handleShowCreatePostModal(pet)}>Create Post</Button>
-            <Button 
-              variant="secondary" 
-              className="me-2"
-              onClick={() => handleShowPostsModal(pet)}>View Posts</Button>
+            <div className="d-flex button-wrap">
+              <Button
+                variant="primary"
+                className="me-2"
+                onClick={() => handleShowCreatePostModal(pet)}>Create Post</Button>
+              <Button
+                variant="secondary"
+                className="me-2"
+                onClick={() => handleShowPostsModal(pet)}>View Posts</Button>
+            </div>
           </article>
         ))}
       </section>

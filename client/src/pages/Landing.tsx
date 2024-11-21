@@ -10,8 +10,8 @@ function Landing() {
   return (
     <Container fluid={true}>
       <Row>
-        <Col className="landing-hero-image"></Col>
-        <Col className="d-flex flex-column justify-content-center">
+        <Col className="landing-hero-image" xs="12" md="6"></Col>
+        <Col className="d-flex flex-column justify-content-center hero-text" xs="12" md="6">
           <h1 className="text-center">Petstagram</h1>
           <h3 className="text-center fw-light">The fun hangout where your pets can socialize!</h3>
         </Col>
