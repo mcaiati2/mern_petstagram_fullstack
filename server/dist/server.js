@@ -24,7 +24,7 @@ connection.once('open', async () => {
         // Attach the context object for all resolvers by referencing a function that returns an object with req and res, and if they have a valid cookie/jwt, req.user will be their user object
         context: authenticate
     }));
-    if (true) {
+    if (process.env.PORT) {
         const __dirname = path.dirname(new URL(import.meta.url).pathname);
         // Share all files in the client/dist folder with the client-side
         app.use(express.static(path.join(__dirname, '../../client/dist')));

@@ -16,7 +16,7 @@ const initialFormData = {
 function PetForm() {
   const [formData, setFormData] = useState(initialFormData);
   const [createPet] = useMutation(CREATE_PET, {
-    refetchQueries: [GET_USER_PETS]
+    refetchQueries: [{ query: GET_USER_PETS }]
   });
   const navigate = useNavigate();
 
