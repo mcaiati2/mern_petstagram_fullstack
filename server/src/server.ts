@@ -40,6 +40,7 @@ connection.once('open', async () => {
   console.log('PORT VARIABLE', PORT);
 
   if (process.env.PORT) {
+    console.log('Triggered');
     const __dirname = path.dirname(new URL(import.meta.url).pathname);
     // Share all files in the client/dist folder with the client-side
     app.use(express.static(path.join(__dirname, '../../client/dist')));
