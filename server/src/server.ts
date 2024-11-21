@@ -2,15 +2,14 @@ import express from 'express';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import cookieParser from 'cookie-parser';
-import jwt from 'jsonwebtoken';
+import path from 'path';
 
 import connection from './config/connection.js';
+import { authenticate } from './services/auth.js';
 
 import typeDefs from './schema/typeDefs.js';
 import resolvers from './schema/resolvers.js';
-import User from './models/User.js';
 
-const { verify } = jwt;
 const app = express();
 const PORT = process.env.PORT || 3333;
 
@@ -29,47 +28,21 @@ connection.once('open', async () => {
     // Allow the resolvers to access client-side cookies through context.req.cookies
     cookieParser(),
     expressMiddleware(server, {
-      // Attach the context object for all resolvers - The return value of the function is what your context will be
-      context: async ({ req, res }: {req: any; res: any}) => {
-        const pet_token = req.cookies?.pet_token;
-
-        if (pet_token) {
-          try {
-
-            if (!process.env.JWT_SECRET) {
-              console.log('MUST ADD JWT_SECRET TO .env!');
-
-              return {
-                req: req,
-                res: res
-              }
-            }
-
-            const userData = verify(pet_token, process.env.JWT_SECRET);
-            
-            if (!userData || typeof userData === 'string') {
-              return {
-                req: req,
-                res: res
-              }
-            }
-
-            const user = await User.findById(userData.user_id);
-
-            req.user = user;
-
-          } catch (error) {
-            console.log('JWT VERIFICATION ERROR', error);
-          }
-        }
-
-        return {
-          req: req,
-          res: res
-        };
-      }
+      // Attach the context object for all resolvers by referencing a function that returns an object with req and res, and if they have a valid cookie/jwt, req.user will be their user object
+      context: authenticate
     }),
   );
+
+  if (process.env.PORT) {
+    const __dirname = path.dirname(new URL(import.meta.url).pathname);
+    // Share all files in the client/dist folder with the client-side
+    app.use(express.static(path.join(__dirname, '../../client/dist')));
+
+    // Create a wildcard route that sends the client/dist/index.html file back to the client-side
+    app.get('*', (_, res) => {
+      res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+    });
+  }
 
   app.listen(PORT, () => {
     console.log('Express server started on', PORT);
