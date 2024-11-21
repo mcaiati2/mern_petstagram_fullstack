@@ -36,7 +36,7 @@ connection.once('open', async () => {
     }),
   );
 
-  if (process.env.PORT) {
+  if (true) {
     const __dirname = path.dirname(new URL(import.meta.url).pathname);
     // Share all files in the client/dist folder with the client-side
     app.use(express.static(path.join(__dirname, '../../client/dist')));
