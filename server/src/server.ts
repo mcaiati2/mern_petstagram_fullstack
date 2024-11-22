@@ -23,7 +23,7 @@ const server = new ApolloServer({
 
 connection.once('open', async () => {
   await server.start();
-  
+
   // Middleware
   app.use(
     '/graphql',
