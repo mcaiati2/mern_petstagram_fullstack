@@ -25,14 +25,13 @@ const pet_resolvers = {
     // Get all posts
     async getAllPosts() {
       const posts = await Post.find().populate('pet');
-      console.log('all');
 
       return posts;
     },
 
     // Get user pets
     async getUserPets(_: any, __: any, context: Context) {
-      console.log('user pets');
+
       if (!context.req.user) {
         return {
           errors: ['You are not authorized to perform this action']
@@ -47,11 +46,11 @@ const pet_resolvers = {
     },
 
     // Get pet posts
-    async getPostsForPet(_: any, args: {pet_id: Types.ObjectId}) {
+    async getPostsForPet(_: any, args: { pet_id: Types.ObjectId }) {
       const posts = await Post.find({
         pet: args.pet_id
       });
-      
+
       return posts;
     }
   },
@@ -65,7 +64,7 @@ const pet_resolvers = {
           errors: ['You are not authorized to perform this action']
         }
       }
-      
+
       try {
         const pet = await Pet.create({
           ...args,

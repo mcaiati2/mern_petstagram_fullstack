@@ -34,7 +34,7 @@ function CreatePostModal({
   });
 
   const handleModalClose = () => {
-    setFormData({...initialFormData});
+    setFormData({ ...initialFormData });
     setShowCreatePostModal(false);
   };
 
@@ -54,7 +54,7 @@ function CreatePostModal({
         }
       });
 
-      setFormData({...initialFormData});
+      setFormData({ ...initialFormData });
 
       handleModalClose();
     } catch (error: any) {
@@ -88,12 +88,12 @@ function CreatePostModal({
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Enter the post details</Form.Label>
-            <Form.Control 
-              name="body" 
+            <Form.Control
+              name="body"
               value={formData.body}
-              onChange={handleInputChange} 
-              as="textarea" 
-              rows={3} 
+              onChange={handleInputChange}
+              as="textarea"
+              rows={3}
               placeholder="Type your details" />
           </Form.Group>
         </Form>
