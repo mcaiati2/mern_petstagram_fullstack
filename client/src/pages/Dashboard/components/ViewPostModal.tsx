@@ -15,7 +15,7 @@ function ViewPostModal({
   setShowPostsModal,
   selectedPet
 }: ModalProps) {
-  const {data: postData} = useQuery(GET_POSTS_FOR_PET, {
+  const { data: postData } = useQuery(GET_POSTS_FOR_PET, {
     variables: {
       petId: selectedPet?._id
     }
@@ -29,6 +29,10 @@ function ViewPostModal({
         <Modal.Title>Posts for {selectedPet?.name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {postData && !postData.getPostsForPet.length && (
+          <p>No posts have been added.</p>
+        )}
+
         {postData && postData.getPostsForPet.map((post: Post) => (
           <article key={post._id} className="mb-4">
             <h5>{post.title}</h5>
