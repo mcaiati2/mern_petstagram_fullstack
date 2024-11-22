@@ -32,6 +32,7 @@ const userSchema = new Schema({
     ref: 'Pet'
   }]
 }, {
+  collection: 'pet_app_users',
   toJSON: {
     transform(_, user) {
       delete user.password;
@@ -43,7 +44,7 @@ const userSchema = new Schema({
 });
 
 // Encrypt the user's password before the user is saved to the users collection
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
   const user: any = this;
 
   if (user.isNew) {
@@ -54,7 +55,7 @@ userSchema.pre('save', async function(next) {
 });
 
 // Setup a validation function that we can use to check that a user's password is valid (formPassword vs encrypted password)
-userSchema.methods.validatePassword = async function(formPassword: string) {
+userSchema.methods.validatePassword = async function (formPassword: string) {
   return await compare(formPassword, this.password);
 }
 
