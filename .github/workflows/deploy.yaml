@@ -25,14 +25,14 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-
+    
     - name: Run builds
       run: npm run client:build && npm run server:build
 
     - name: Run tests
       run: npm test
 
- merge:
+  merge:
     runs-on: ubuntu-latest
     needs: tests
 

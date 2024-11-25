@@ -14,7 +14,7 @@ import resolvers from './schema/resolvers.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3333;
+const PORT = Number(process.env.PORT) || 3333;
 
 const server = new ApolloServer({
   typeDefs,

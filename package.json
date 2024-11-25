@@ -15,7 +15,8 @@
     "start": "node ./server/dist/server.js",
     "render:install": "cd ./server && npm i",
     "install": "cd ./server && npm i && cd ../client && npm i",
-    "test": "concurrently \"npm run dev\" \"wait-on tcp:5173 && cd ./client && npm run cypress:open\"",
+    "cypress:test": "cd ./client && npm run cypress:run",
+    "test": "start-server-and-test start http://localhost:10000 cypress:test",
     "prep": "npm run client:build && npm run server:build"
   },
   "keywords": [],
@@ -23,6 +24,7 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^9.1.0",
+    "start-server-and-test": "^2.0.8",
     "wait-on": "^8.0.1"
   }
 }
