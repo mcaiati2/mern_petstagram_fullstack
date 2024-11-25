@@ -30,5 +30,4 @@ jobs:
       run: npm run client:build && npm run server:build
 
     - name: Run tests
-      run: | 
-        npm test &
+      run: npm test 
